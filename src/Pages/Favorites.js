@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Card from "../Components/CardComponent";
 
-function FavPage() {
+function Favorites () {
   const favorites = useSelector((state) => state.myFavoriteReducer.items);
 
   if (favorites.length === 0) {
@@ -39,4 +39,4 @@ function FavPage() {
   );
 }
 
-export default FavPage;
+export default Favorites ;
