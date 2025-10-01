@@ -5,10 +5,10 @@ import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
 import login from "./pages/Login";
 import register from "./pages/Register";
-import favorites from "./pages/Favorites";
 import Details from "./pages/Details";
 import NotFound from "./pages/NotFound";
 import { LangContext } from "./context/LangContext";
+import favoriteReducer from "./Redux/Reducers/FavReducers";
 
 export default function App() {
   const [contextLang, setContextLang] = React.useState("en");
@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/movies" component={MoviesPage} exact />
           <Route path="/login" component={login} exact />
           <Route path="/register" component={register} exact />
-          <Route path="/fav" component={favorites} exact />
+          <Route path="/fav" component={favoriteReducer} exact />
           <Route path="/movie/:id" component={Details} exact />
           <Route component={NotFound} /> {/* fallback */}
         </Switch>
