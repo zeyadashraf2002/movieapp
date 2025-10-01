@@ -1,16 +1,14 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Nav from "./components/Nav";
-import Home from "./pages/Home";
-import MoviesPage from "./pages/MoviesPage";
-import login from "./pages/Login";
-import register from "./pages/Register";
-import FavPage from "./pages/Favorites";
-import NotFound from "./pages/NotFound";
+
 
 import { LangContext } from "./context/LangContext";
-import favoriteReducer from "./Redux/Reducers/FavReducers";
 import Details from './Pages/Details';
+import Home from './Pages/HomePage';
+import MoviesPage from './Pages/MoviesPage';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Favorites from './Pages/Favorites';
 
 export default function App() {
   const [contextLang, setContextLang] = React.useState("en");
@@ -22,9 +20,9 @@ export default function App() {
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/movies" component={MoviesPage} exact />
-          <Route path="/login" component={login} exact />
-          <Route path="/register" component={register} exact />
-          <Route path="/fav" component={FavPage} exact />
+          <Route path="/login" component={Login} exact />
+          <Route path="/register" component={Register} exact />
+          <Route path="/fav" component={Favorites} exact />
           <Route path="/movie/:id" component={Details} exact />
           <Route component={NotFound} /> {/* fallback */}
         </Switch>

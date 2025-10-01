@@ -6,7 +6,7 @@ import Card from "../Components/CardComponent";
 import Pagination from "../Components/Pagination";
 import SearchBar from "../Components/Search";
 import MySpinner from "../Components/MySpinner";
-import { LangContext } from "../Components/Context/LangContext";
+import { LangContext } from './../Components/Context/LangContext';
 
 
 function MoviesPage() {
