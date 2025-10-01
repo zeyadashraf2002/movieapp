@@ -31,12 +31,12 @@ function App() {
         <LangContext.Provider value={{ contextLang, setContextLang }}>
           <Nav />
           <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/movies" component={MoviesPage} exact />
-            <Route path="/login" component={login} exact />
-            <Route path="/register" component={register} exact />
-            <Route path="/fav" component={favorites} exact />
-            <Route path="/movie/:id" component={Details} exact />
+            <Route path="movieapp/" component={Home} exact />
+            <Route path="movieapp/movies" component={MoviesPage} exact />
+            <Route path="movieapp/login" component={login} exact />
+            <Route path="movieapp/register" component={register} exact />
+            <Route path="movieapp/fav" component={favorites} exact />
+            <Route path="movieapp/movie/:id" component={Details} exact />
             <Route component={NotFound} /> {/* fallback */}
           </Switch>
         </LangContext.Provider>
