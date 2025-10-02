@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMoviesList } from "../Redux/Actions/MoviesAction";
 import { changeLang } from "../Redux/Actions/LangAcion";
 import Card from "../Components/CardComponent";
-import Pagination from "../Components/Pagination";
-import SearchBar from "../Components/Search";
-import MySpinner from "../Components/MySpinner";
-import { LangContext } from './../Components/Context/LangContext';
-
+import { LangContext } from '../context/LangContext';
+import SearchBar from './../Components/Search';
+import MySpinner from './../Components/MySpinner';
+import Pagination from './../Components/Pagination';
 
 function MoviesPage() {
   const dispatch = useDispatch();
-  const reduxLang = useSelector((state) => state.myLangReducer.lang); // من Redux
+  const reduxLang = useSelector((state) => state.myLangReducer.lang);
+  const theme = useSelector((state) => state.myThemeReducer.theme); 
   const loader = useSelector((state) => state.myLoaderReducer.loader);
 
-  const { contextLang, setContextLang } = useContext(LangContext); // من Context
+  const { contextLang, setContextLang } = useContext(LangContext);
 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -31,22 +31,25 @@ function MoviesPage() {
   }, [page, query, contextLang, dispatch]);
 
   return (
-    <div className="container-fluid text-light min-vh-100 py-4">
+    <div
+      className={`container-fluid min-vh-100 py-4 ${
+        theme === "LIGHT" ? "bg-light text-dark" : "bg-dark text-light"
+      }`}
+    >
       <div className="container">
-
-        {/* language switch button (Context) */}
         <button
-          className="btn btn-dark my-3"
+          className={`btn my-3 ${
+            theme === "LIGHT" ? "btn-outline-dark" : "btn-outline-light"
+          }`}
           onClick={() => {
             const newLang = contextLang === "EN" ? "AR" : "EN";
-            setContextLang(newLang); // Context
-            dispatch(changeLang(newLang)); // Redux (لو عايز الاتنين يبقوا متزامنين)
+            setContextLang(newLang);
+            dispatch(changeLang(newLang));
           }}
         >
           {contextLang === "EN" ? "🇺🇸 English" : "🇪🇬 Arabic"}
         </button>
 
-        {/* search bar */}
         <SearchBar
           onSearch={(value) => {
             setQuery(value);
@@ -54,7 +57,6 @@ function MoviesPage() {
           }}
         />
 
-        {/* loader OR movies */}
         {loader ? (
           <div className="d-flex justify-content-center mt-5">
             <MySpinner />
@@ -73,13 +75,13 @@ function MoviesPage() {
                         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                         : "https://via.placeholder.com/500x750?text=No+Image"
                     }
+                    theme={theme} 
                   />
                 </div>
               ))}
           </div>
         )}
 
-        {/* pagination */}
         <div className="d-flex justify-content-center mt-4">
           <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
         </div>

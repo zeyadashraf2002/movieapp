@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore } from "redux";
 import CombineReducers from "./Reducers/CombineReducers";
-import { thunk } from "redux-thunk";   // مع النسخة الجديدة
+import { thunk } from "redux-thunk";   
 
 const MyStore = createStore(
   CombineReducers,

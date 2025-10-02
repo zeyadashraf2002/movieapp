@@ -1,11 +1,15 @@
+import { useSelector } from "react-redux";
 import Title from "../Components/TitleComponent";
 
 function Register() {
+  const theme = useSelector((state) => state.myThemeReducer.theme); 
   return (
     <div
-      className="container-fluid d-flex justify-content-center align-items-center min-vh-100"
+      className={`container-fluid d-flex justify-content-center align-items-center min-vh-100 ${
+        theme === "LIGHT" ? "bg-light text-dark" : "bg-dark text-light"
+      }`}
       style={{
-        backgroundImage: "url('/photo.jpg')",
+        backgroundImage: theme === "LIGHT" ? "none" : "url('/photo.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -13,8 +17,8 @@ function Register() {
       <div
         className="card p-4 shadow-lg"
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)",
-          color: "#fff",
+          backgroundColor: theme === "LIGHT" ? "#fff" : "rgba(0, 0, 0, 0.6)",
+          color: theme === "LIGHT" ? "#000" : "#fff",
           borderRadius: "10px",
           maxWidth: "400px",
           width: "100%",
@@ -32,8 +36,8 @@ function Register() {
               className="form-control border-0"
               id="userName"
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                color: "#fff",
+                backgroundColor: theme === "LIGHT" ? "#e9ecef" : "rgba(255, 255, 255, 0.2)",
+                color: theme === "LIGHT" ? "#000" : "#fff",
               }}
             />
           </div>
@@ -47,12 +51,11 @@ function Register() {
               className="form-control border-0"
               id="exampleInputEmail1"
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                color: "#fff",
+                backgroundColor: theme === "LIGHT" ? "#e9ecef" : "rgba(255, 255, 255, 0.2)",
+                color: theme === "LIGHT" ? "#000" : "#fff",
               }}
-              aria-describedby="emailHelp"
             />
-            <div id="emailHelp" className="form-text text-light">
+            <div id="emailHelp" className={`form-text ${theme === "LIGHT" ? "text-dark" : "text-light"}`}>
               We'll never share your email with anyone else.
             </div>
           </div>
@@ -66,8 +69,8 @@ function Register() {
               className="form-control border-0"
               id="exampleInputPassword1"
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                color: "#fff",
+                backgroundColor: theme === "LIGHT" ? "#e9ecef" : "rgba(255, 255, 255, 0.2)",
+                color: theme === "LIGHT" ? "#000" : "#fff",
               }}
             />
           </div>
@@ -81,13 +84,13 @@ function Register() {
               className="form-control border-0"
               id="exampleInputPassword2"
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.2)",
-                color: "#fff",
+                backgroundColor: theme === "LIGHT" ? "#e9ecef" : "rgba(255, 255, 255, 0.2)",
+                color: theme === "LIGHT" ? "#000" : "#fff",
               }}
             />
           </div>
 
-          <button type="submit" className="btn btn-danger w-100">
+          <button type="submit" className={`btn ${theme === "LIGHT" ? "btn-danger" : "btn-outline-light"} w-100`}>
             Submit
           </button>
         </form>

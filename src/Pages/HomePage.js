@@ -6,20 +6,20 @@ import SearchBar from "../Components/Search";
 import Myspinner from "../Components/MySpinner";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLang } from "../Redux/Actions/LangAcion";
-
-function Home() {
+function HomePage() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [query, setQuery] = useState("");
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const language = useSelector((state) => state.myLangReducer.lang);
+  const theme = useSelector((state) => state.myThemeReducer.theme); 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchMovies = async () => {
-      setLoading(true); // 👈 شغل اللودر المحلي
+      setLoading(true);
       try {
         let url = query
           ? `/search/movie?query=${query}&page=${page}&language=${language === "EN" ? "en-US" : "ar-SA"}`
@@ -33,14 +33,18 @@ function Home() {
       } catch (err) {
         console.log(err);
       } finally {
-        setLoading(false); // 👈 وقف اللودر
+        setLoading(false);
       }
     };
     fetchMovies();
   }, [page, query, language]);
 
   return (
-    <div className="container-fluid text-light min-vh-100 py-4">
+    <div
+      className={`container-fluid min-vh-100 py-4 ${
+        theme === "LIGHT" ? "bg-light text-dark" : "bg-dark text-light"
+      }`}
+    >
       <div className="container">
         <SearchBar
           onSearch={(value) => {
@@ -50,13 +54,13 @@ function Home() {
         />
 
         <div
-          className="btn btn-outline-light my-3"
+          className={`btn ${theme === "LIGHT" ? "btn-outline-dark" : "btn-outline-light"} my-3`}
           onClick={() => dispatch(changeLang(language === "EN" ? "AR" : "EN"))}
         >
           {language}
         </div>
 
-        {loading ? ( // 👈 استخدم اللودر المحلي
+        {loading ? (
           <div className="d-flex justify-content-center mt-5">
             <Myspinner />
           </div>
@@ -74,6 +78,7 @@ function Home() {
                         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                         : "https://via.placeholder.com/500x750?text=No+Image"
                     }
+                    theme={theme} 
                   />
                 </div>
               ))}
@@ -88,4 +93,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
