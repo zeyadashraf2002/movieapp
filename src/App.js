@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/register" component={Register} exact />
           <Route path="/fav" component={Favorites} exact />
           <Route path="/movie/:id" component={Details} exact />
-          <Route component={NotFound} /> {/* fallback */}
+          <Route component={NotFound} /> 
         </Switch>
       </LangContext.Provider>
     </BrowserRouter>

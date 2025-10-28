@@ -8,24 +8,22 @@ export const axiosInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
 });
 
-// Request → loader يبدأ
 axiosInstance.interceptors.request.use(
   (config) => {
     config.params = { ...config.params, api_key: API_KEY };
-    MyStore.dispatch(LoaderAction(true)); // شغل اللودر
+    MyStore.dispatch(LoaderAction(true)); 
     return config;
   },
   (error) => {
-    MyStore.dispatch(LoaderAction(false)); // وقف اللودر لو في error
+    MyStore.dispatch(LoaderAction(false));
     return Promise.reject(error);
   }
 );
 
-// Response → loader يقف
 axiosInstance.interceptors.response.use(
   (response) => {
     setTimeout(() => {
-      MyStore.dispatch(LoaderAction(false)); // وقف اللودر بعد ما ييجي الرد
+      MyStore.dispatch(LoaderAction(false));
     }, 500);
     return response;
   },
